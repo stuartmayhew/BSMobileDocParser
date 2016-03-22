@@ -50,7 +50,7 @@ Partial Class fmMain
         Me.tbStartRecp.Name = "tbStartRecp"
         Me.tbStartRecp.Size = New System.Drawing.Size(100, 20)
         Me.tbStartRecp.TabIndex = 1
-        Me.tbStartRecp.Text = "2016012124"
+        Me.tbStartRecp.Text = "2016012469"
         '
         'tbEndRecp
         '

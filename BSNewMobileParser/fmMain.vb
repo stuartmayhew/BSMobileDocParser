@@ -52,7 +52,7 @@ Public Class fmMain
         ShowStatus("processing Bluesheet " + Str(TBSNO) + " from " + Str(StartRecp))
 
         For i = StartRecp To EndRecp
-            If i Mod 50 = 0 Then
+            If i Mod 10 = 0 Then
                 Try
                     DelIECache()
                 Catch ex As Exception
@@ -380,7 +380,7 @@ Public Class fmMain
 
     Public Sub DelIECache()
         Dim di As New DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
-        On Error GoTo err
+        'On Error GoTo err
         If di.Exists = False Then
             di.Create()
         End If
@@ -390,11 +390,15 @@ Public Class fmMain
         Cache2 = IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
         For Each Cache1 In Cache2 'Get all files in Temporary internet files, ‘folder and then set their attribute to normal, and then delete them.
             IO.File.SetAttributes(Cache1, FileAttributes.Normal)
-            IO.File.Delete(Cache1)
+            Try
+                IO.File.Delete(Cache1)
+            Catch ex As Exception
+                Dim s As String = ex.Message
+            End Try
         Next
         ' The true indicates that if subdirectories
         ' or files are in this directory, they are to be deleted as well.
-        di.Delete(True)
+        'di.Delete(True)
 err:    '///IGNORE ERROR///
     End Sub
 
