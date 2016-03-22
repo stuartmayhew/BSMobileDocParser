@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BSNewMobileParser", "BSNewMobileParser\BSNewMobileParser.vbproj", "{61F2DA0B-A59C-4211-AD24-80B8B1947226}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MobileParserSetup", "MobileParserSetup\MobileParserSetup.vdproj", "{AB51E175-0285-4607-AFE4-B4A40FB7779B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61F2DA0B-A59C-4211-AD24-80B8B1947226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F2DA0B-A59C-4211-AD24-80B8B1947226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F2DA0B-A59C-4211-AD24-80B8B1947226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F2DA0B-A59C-4211-AD24-80B8B1947226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB51E175-0285-4607-AFE4-B4A40FB7779B}.Debug|Any CPU.ActiveCfg = Debug
+		{AB51E175-0285-4607-AFE4-B4A40FB7779B}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
