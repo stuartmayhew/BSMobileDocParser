@@ -52,13 +52,12 @@ Public Class fmMain
         ShowStatus("processing Bluesheet " + Str(TBSNO) + " from " + Str(StartRecp))
 
         For i = StartRecp To EndRecp
-            If i Mod 10 = 0 Then
-                Try
-                    DelIECache()
-                Catch ex As Exception
+            Try
+                DelIECache()
+            Catch ex As Exception
 
-                End Try
-            End If
+            End Try
+
             If isAborted Then
                 Exit For
             End If
@@ -384,22 +383,27 @@ Public Class fmMain
         If di.Exists = False Then
             di.Create()
         End If
-        System.IO.File.SetAttributes(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache).ToString, FileAttributes.Normal)
+        'System.IO.File.SetAttributes(Environment.GetFolderPath("C:\Users\Administrator\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.IE5").ToString, FileAttributes.Normal)
         Dim Cache1 As String
+
         Dim Cache2() As String
-        Cache2 = IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
-        For Each Cache1 In Cache2 'Get all files in Temporary internet files, ‘folder and then set their attribute to normal, and then delete them.
-            IO.File.SetAttributes(Cache1, FileAttributes.Normal)
-            Try
-                IO.File.Delete(Cache1)
-            Catch ex As Exception
-                Dim s As String = ex.Message
-            End Try
+        Cache2 = IO.Directory.GetDirectories("C:\Users\Administrator\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.IE5")
+        For Each Cache1 In Cache2
+            Dim fls() As String = IO.Directory.GetFiles(Cache1)
+            For Each file As String In fls
+                IO.File.SetAttributes(file, FileAttributes.Normal)
+                Try
+                    IO.File.Delete(file)
+                Catch ex As Exception
+                    Dim s As String = ex.Message
+                End Try
+            Next
         Next
+
         ' The true indicates that if subdirectories
         ' or files are in this directory, they are to be deleted as well.
         'di.Delete(True)
-err:    '///IGNORE ERROR///
+        '///IGNORE ERROR///
     End Sub
 
     Private Sub GetDocumentImage()
