@@ -399,6 +399,11 @@ Public Class fmMain
                 End Try
             Next
         Next
+        Try
+            Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), True)
+        Catch ex As Exception
+
+        End Try
 
         ' The true indicates that if subdirectories
         ' or files are in this directory, they are to be deleted as well.

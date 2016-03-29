@@ -1426,58 +1426,63 @@ Public Module bsCommonProcs
         Return "ureadable"
     End Function
     Public Function GetHospAmount(ByVal instNo As String, ByVal HospName As String) As String
-        Dim fStream As System.IO.StreamReader
-        fStream = New System.IO.StreamReader("c:\inetpub\wwwroot\scanneddocs\" + Trim(Str(instNo)) + ".tif.txt")
-        Dim line As String
-        Dim lineStrs() As String
-        If HospName = "University Of South Alabama Hospitals" Then
-            While Not fStream.EndOfStream
-                line = fStream.ReadLine
-                If line.Contains("TOTAL CHARGES") Or line.Contains("DISCHARGE") Then
-                    lineStrs = line.Split(":")
-                    Return lineStrs(UBound(lineStrs))
-                End If
-            End While
-        ElseIf HospName = "Mobile Infirmary Medical Center" Then
-            While Not fStream.EndOfStream
-                line = fStream.ReadLine
-                If line.Contains("Amount Due") Then
-                    lineStrs = line.Split(":")
-                    If lineStrs(UBound(lineStrs)).Contains("$") Then
+        Try
+
+            Dim fStream As System.IO.StreamReader
+            fStream = New System.IO.StreamReader("c:\inetpub\wwwroot\scanneddocs\" + Trim(Str(instNo)) + ".tif.txt")
+            Dim line As String
+            Dim lineStrs() As String
+            If HospName = "University Of South Alabama Hospitals" Then
+                While Not fStream.EndOfStream
+                    line = fStream.ReadLine
+                    If line.Contains("TOTAL CHARGES") Or line.Contains("DISCHARGE") Then
+                        lineStrs = line.Split(":")
                         Return lineStrs(UBound(lineStrs))
                     End If
-                End If
-
-                If line.Contains("Amount Due") And line.IndexOf("$") < 0 Then
-                    While Not line.Contains("$")
-                        line = fStream.ReadLine()
-                        If line.Contains("$") Then
-                            Return line
+                End While
+            ElseIf HospName = "Mobile Infirmary Medical Center" Then
+                While Not fStream.EndOfStream
+                    line = fStream.ReadLine
+                    If line.Contains("Amount Due") Then
+                        lineStrs = line.Split(":")
+                        If lineStrs(UBound(lineStrs)).Contains("$") Then
+                            Return lineStrs(UBound(lineStrs))
                         End If
-                    End While
-                End If
-            End While
-        ElseIf HospName.Contains("Springhill Memorial Hospital") Then
-            While Not fStream.EndOfStream
-                line = fStream.ReadLine
-                If line.Contains("claimed to be") Then
-                    lineStrs = line.Split(":")
-                    If lineStrs(UBound(lineStrs)).Contains("$") Then
-                        Return lineStrs(UBound(lineStrs))
                     End If
-                End If
 
-                If line.Contains("claimed to be") And line.IndexOf("$") < 0 Then
-                    While Not line.Contains("$")
-                        line = fStream.ReadLine()
-                        If line.Contains("$") Then
-                            Return line
+                    If line.Contains("Amount Due") And line.IndexOf("$") < 0 Then
+                        While Not line.Contains("$")
+                            line = fStream.ReadLine()
+                            If line.Contains("$") Then
+                                Return line
+                            End If
+                        End While
+                    End If
+                End While
+            ElseIf HospName.Contains("Springhill Memorial Hospital") Then
+                While Not fStream.EndOfStream
+                    line = fStream.ReadLine
+                    If line.Contains("claimed to be") Then
+                        lineStrs = line.Split(":")
+                        If lineStrs(UBound(lineStrs)).Contains("$") Then
+                            Return lineStrs(UBound(lineStrs))
                         End If
-                    End While
-                End If
-            End While
+                    End If
 
-        End If
+                    If line.Contains("claimed to be") And line.IndexOf("$") < 0 Then
+                        While Not line.Contains("$")
+                            line = fStream.ReadLine()
+                            If line.Contains("$") Then
+                                Return line
+                            End If
+                        End While
+                    End If
+                End While
+
+            End If
+        Catch ex As Exception
+            Return "unreadable"
+        End Try
 
         Return "ureadable"
     End Function

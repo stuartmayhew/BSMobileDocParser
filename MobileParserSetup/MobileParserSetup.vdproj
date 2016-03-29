@@ -27,8 +27,26 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_0C3ABA7765FA4333AD3E9474702CB38C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_28BAA7C2E0C645939BBD2FF7B6F420D2"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_304BF73B6EFB9A8F52EEA8F4BBC354FD"
+        "OwnerKey" = "8:_090090C564A6A2554731CD1F02E1570B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_37A7F54F771D4767D24D14BBAF2BA04B"
+        "OwnerKey" = "8:_0C3ABA7765FA4333AD3E9474702CB38C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,14 +57,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F201153FC7E70A719CEDDC54E70D3554"
-        "OwnerKey" = "8:_090090C564A6A2554731CD1F02E1570B"
+        "MsmKey" = "8:_C3581574974C4F12F4D750C49072A183"
+        "OwnerKey" = "8:_0C3ABA7765FA4333AD3E9474702CB38C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_08855F2D12914FDC96DC620462C779E6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0C3ABA7765FA4333AD3E9474702CB38C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C3581574974C4F12F4D750C49072A183"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -158,7 +188,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:3.5.30729 "
+                "FrameworkVersion" = "8:3.5.30729  "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -197,6 +227,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_0C3ABA7765FA4333AD3E9474702CB38C"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Interop.MODI, Version=12.0.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_0C3ABA7765FA4333AD3E9474702CB38C"
+                    {
+                    "Name" = "8:Interop.MODI.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\BSNewMobileParser\\bin\\Debug\\Interop.MODI.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9AF9439D4B9E49679BD4642D77D102DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_28BAA7C2E0C645939BBD2FF7B6F420D2"
             {
             "SourcePath" = "8:..\\BSNewMobileParser\\Musett-Vegas-Coins-700.ico"
@@ -215,6 +276,46 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_304BF73B6EFB9A8F52EEA8F4BBC354FD"
+            {
+            "SourcePath" = "8:Bytescout.PDFRenderer.tlb"
+            "TargetName" = "8:Bytescout.PDFRenderer.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_9AF9439D4B9E49679BD4642D77D102DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_37A7F54F771D4767D24D14BBAF2BA04B"
+            {
+            "SourcePath" = "8:MDIVWCTL.DLL"
+            "TargetName" = "8:MDIVWCTL.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_9AF9439D4B9E49679BD4642D77D102DD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4E5977A6C20A35DD997514A4C200698B"
@@ -248,10 +349,21 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F201153FC7E70A719CEDDC54E70D3554"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C3581574974C4F12F4D750C49072A183"
             {
-            "SourcePath" = "8:Bytescout.PDFRenderer.tlb"
-            "TargetName" = "8:Bytescout.PDFRenderer.tlb"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:TRUE"
+            "AssemblyAsmDisplayName" = "8:stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                "ScatterAssemblies"
+                {
+                    "_C3581574974C4F12F4D750C49072A183"
+                    {
+                    "Name" = "8:stdole.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:stdole.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9AF9439D4B9E49679BD4642D77D102DD"
             "Condition" = "8:"
@@ -263,7 +375,7 @@
             "Permanent" = "11:FALSE"
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
-            "Register" = "3:2"
+            "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
@@ -324,15 +436,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MobileParserSetup"
-        "ProductCode" = "8:{E24BDDE7-C46E-4AAE-A784-E07B74B866DD}"
-        "PackageCode" = "8:{7287A912-CF15-494A-9522-0BB097BD95F3}"
+        "ProductCode" = "8:{A25ACEC9-0189-4458-81F0-489F67957598}"
+        "PackageCode" = "8:{DD35EE61-2FA6-442D-AD73-1B62C075877C}"
         "UpgradeCode" = "8:{FE63EEE9-2FE0-4208-A020-E96B935D5199}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.14"
+        "ProductVersion" = "8:1.15"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
