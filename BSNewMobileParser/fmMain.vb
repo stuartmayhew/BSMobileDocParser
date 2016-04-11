@@ -287,7 +287,7 @@ Public Class fmMain
             Case "H", "LIEN", "VLD"
                 ShowStatus("a lien..")
                 Dim LI = New LIDoc(BSDocConstants.bsDocType.bsDeltaDoc, currInst, "Lien")
-                LI.AuxTable = 3
+                LI.AuxTable = 5
                 LI.ProcessDocument()
                 If LI.TableName = "ST" Then
                     If ConvertFile(currInst, LI.TableName, False, True) Then
