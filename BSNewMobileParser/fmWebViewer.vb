@@ -39,6 +39,7 @@ Public Class fmWebViewer
                 WebBrowser1.Navigate("https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=mobimages&lq=Instrument%3A" + Trim(Str(currInst)))
             End If
             If WebBrowser1.DocumentText.Contains("Advanced Search") Then
+                Dim wc As New WebClient()
                 Dim urlStr As String = "https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=details&templateName=default&lq=Instrument:" + currInstStr
                 WebBrowser1.Navigate(urlStr)
             End If

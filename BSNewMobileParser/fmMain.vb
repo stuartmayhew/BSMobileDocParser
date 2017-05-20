@@ -1,12 +1,13 @@
 Imports System.Data.SqlClient
 Imports System.IO
 Imports System.Net
+Imports System.Security.AccessControl
 Imports System.Windows.Forms
 Imports MySql.Data.MySqlClient
 
 
 Public Class fmMain
-    Public dg As New clsDataGetter(My.Settings.BlueSheetsLocalConnectionString)
+    Public dg As New clsDataGetter(My.Settings.BluesheetsLocalConnectionString)
 
     Public StartRecp As Integer
     Public EndRecp As Integer
@@ -287,13 +288,14 @@ Public Class fmMain
             Case "H", "LIEN", "VLD"
                 ShowStatus("a lien..")
                 Dim LI = New LIDoc(BSDocConstants.bsDocType.bsDeltaDoc, currInst, "Lien")
-                LI.AuxTable = 5
+                LI.AuxTable = 3
                 LI.ProcessDocument()
                 If LI.TableName = "ST" Then
                     If ConvertFile(currInst, LI.TableName, False, True) Then
                         LI.Value = GetALTaxAmount(currInst)
                         LI.KindTax = GetALKindTax(currInst)
                         LI.Address = GetALTaxAddress(currInst)
+                        LI.AuxTable = 5
                     End If
                 ElseIf LI.TableName = "H" Then
                     If ConvertFile(currInst, LI.TableName, False, True) Then
@@ -385,20 +387,25 @@ Public Class fmMain
         End If
         'System.IO.File.SetAttributes(Environment.GetFolderPath("C:\Users\Administrator\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.IE5").ToString, FileAttributes.Normal)
         Dim Cache1 As String
-
-        Dim Cache2() As String
-        Cache2 = IO.Directory.GetDirectories("C:\Users\Administrator\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.IE5")
-        For Each Cache1 In Cache2
-            Dim fls() As String = IO.Directory.GetFiles(Cache1)
-            For Each file As String In fls
-                IO.File.SetAttributes(file, FileAttributes.Normal)
-                Try
-                    IO.File.Delete(file)
-                Catch ex As Exception
-                    Dim s As String = ex.Message
-                End Try
+        Try
+            Dim Cache2() As String
+            Cache2 = IO.Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
+            For Each Cache1 In Cache2
+                Dim fls() As String = IO.Directory.GetFiles(Cache1)
+                For Each file As String In fls
+                    IO.File.SetAttributes(file, FileAttributes.Normal)
+                    Try
+                        IO.File.Delete(file)
+                    Catch ex As Exception
+                        Dim s As String = ex.Message
+                    End Try
+                Next
             Next
-        Next
+
+        Catch ex As Exception
+
+        End Try
+
         Try
             Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), True)
         Catch ex As Exception
@@ -415,19 +422,32 @@ Public Class fmMain
         'WebBrowser1.Navigate("https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=mobimages&lq=Instrument%3A" + Trim(Str(currInst)))
         'wc.DownloadFile("https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=mobimages&lq=Instrument%3A2014053550", "c:\test.pdf")
 
-        Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache)
+        Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + "\Content.IE5"
+        ShowStatus(path)
         Dim fInfo, fInfos() As FileInfo
-        Dim dInfo As DirectoryInfo
+        Dim dInfo, dInfos() As DirectoryInfo
         Dim fName As String = "c:\inetpub\wwwroot\scanneddocs\" + Trim(Str(currInst)) + ".pdf"
         dInfo = New DirectoryInfo(path)
-        fInfos = dInfo.GetFiles("*.*", SearchOption.AllDirectories)
+        Dim FolderAcl As New DirectorySecurity
+        FolderAcl.AddAccessRule(New FileSystemAccessRule("Everyone", FileSystemRights.Modify, InheritanceFlags.ContainerInherit Or InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow))
+        FolderAcl.SetAccessRuleProtection(True, False) 'uncomment to remove existing permissions
+        dInfo.SetAccessControl(FolderAcl)
+        dInfos = dInfo.GetDirectories()
 
-        For Each fInfo In fInfos
-            If fInfo.Name.Contains("document") And fInfo.Extension = ".pdf" Then
-                File.Copy(fInfo.FullName, fName, True)
-                File.Delete(fInfo.FullName)
-            End If
+        For i = 0 To dInfos.Count
+            fInfos = dInfos(i).GetFiles("*")
+            For Each fInfo In fInfos
+                If fInfo.Name.Contains("document") And fInfo.Extension = ".pdf" Then
+                    File.Copy(fInfo.FullName, fName, True)
+                    File.Delete(fInfo.FullName)
+                    Exit For
+                End If
+            Next
+            Exit For
         Next
+
+
+
         DI = Nothing
 
     End Sub

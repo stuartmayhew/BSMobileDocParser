@@ -50,7 +50,7 @@ Partial Class fmMain
         Me.tbStartRecp.Name = "tbStartRecp"
         Me.tbStartRecp.Size = New System.Drawing.Size(100, 20)
         Me.tbStartRecp.TabIndex = 1
-        Me.tbStartRecp.Text = "2016013528"
+        Me.tbStartRecp.Text = "2017023712"
         '
         'tbEndRecp
         '
@@ -58,7 +58,7 @@ Partial Class fmMain
         Me.tbEndRecp.Name = "tbEndRecp"
         Me.tbEndRecp.Size = New System.Drawing.Size(100, 20)
         Me.tbEndRecp.TabIndex = 2
-        Me.tbEndRecp.Text = "2016014028"
+        Me.tbEndRecp.Text = "2017024400"
         '
         'btnMobile
         '
