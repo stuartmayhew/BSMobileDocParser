@@ -71,7 +71,7 @@ Public Class fmMain
             fmML.currInstStr = currInst
             fmML.ShowDialog()
             Try
-                GetDocumentImage()
+                GetDocumentImage(fmML.currSessionString)
                 gotOrigDoc = True
             Catch ex As Exception
                 gotOrigDoc = False
@@ -380,77 +380,90 @@ Public Class fmMain
     End Function
 
     Public Sub DelIECache()
-        Dim di As New DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
-        'On Error GoTo err
-        If di.Exists = False Then
-            di.Create()
-        End If
-        'System.IO.File.SetAttributes(Environment.GetFolderPath("C:\Users\Administrator\AppData\Local\Microsoft\Windows\Temporary Internet Files\Content.IE5").ToString, FileAttributes.Normal)
-        Dim Cache1 As String
-        Try
-            Dim Cache2() As String
-            Cache2 = IO.Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache))
-            For Each Cache1 In Cache2
-                Dim fls() As String = IO.Directory.GetFiles(Cache1)
-                For Each file As String In fls
-                    IO.File.SetAttributes(file, FileAttributes.Normal)
-                    Try
-                        IO.File.Delete(file)
-                    Catch ex As Exception
-                        Dim s As String = ex.Message
-                    End Try
-                Next
-            Next
-
-        Catch ex As Exception
-
-        End Try
-
-        Try
-            Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.InternetCache), True)
-        Catch ex As Exception
-
-        End Try
-
-        ' The true indicates that if subdirectories
-        ' or files are in this directory, they are to be deleted as well.
-        'di.Delete(True)
-        '///IGNORE ERROR///
-    End Sub
-
-    Private Sub GetDocumentImage()
-        'WebBrowser1.Navigate("https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=mobimages&lq=Instrument%3A" + Trim(Str(currInst)))
-        'wc.DownloadFile("https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=mobimages&lq=Instrument%3A2014053550", "c:\test.pdf")
 
         Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + "\Content.IE5"
         ShowStatus(path)
-        Dim fInfo, fInfos() As FileInfo
         Dim dInfo, dInfos() As DirectoryInfo
-        Dim fName As String = "c:\inetpub\wwwroot\scanneddocs\" + Trim(Str(currInst)) + ".pdf"
         dInfo = New DirectoryInfo(path)
         Dim FolderAcl As New DirectorySecurity
         FolderAcl.AddAccessRule(New FileSystemAccessRule("Everyone", FileSystemRights.Modify, InheritanceFlags.ContainerInherit Or InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow))
         FolderAcl.SetAccessRuleProtection(True, False) 'uncomment to remove existing permissions
         dInfo.SetAccessControl(FolderAcl)
         dInfos = dInfo.GetDirectories()
-
-        For i = 0 To dInfos.Count
-            fInfos = dInfos(i).GetFiles("*")
-            For Each fInfo In fInfos
-                If fInfo.Name.Contains("document") And fInfo.Extension = ".pdf" Then
-                    File.Copy(fInfo.FullName, fName, True)
-                    File.Delete(fInfo.FullName)
-                    Exit For
-                End If
-            Next
-            Exit For
+        For i = 0 To dInfos.Count - 1
+            dInfos(i).Delete(True)
         Next
+    End Sub
+
+    Private Sub GetDocumentImage(session As String)
+        'Dim fName As String = "c:\inetpub\wwwroot\scanneddocs\" + Trim(Str(currInst)) + ".pdf"
+        'Dim cookieStr As String ' = BuildCookieStr("2017023712")
+        'Dim instStr As String = Trim(Str(currInst))
+        'Dim url As String = "https://roam.probate.mobilecountyal.gov/ailis/search.do?indexName=mobimages&lq=Instrument%3A" + instStr
+        ''url += "&nodeName=RECORDSMANAGEMENT&clientName=MOBILE&ecomServerURL=https%3A%2F%2Feaccept.granicus.com%2Fecom%2F&ecomClientURL=https%3A%2F%2Froam.probate.mobilecountyal.gov%2Failis%2F&defaultSiteName=MOBILE&isFirmNumberRequired=false&isBarNumberRequired=false&isAuthorizationPending=false&nodeName=RECORDSMANAGEMENT&clientName=MOBILE&ecomServerURL=https%3A%2F%2Feaccept.granicus.com%2Fecom%2F&ecomClientURL=https%3A%2F%2Froam.probate.mobilecountyal.gov%2Failis%2F&defaultSiteName=MOBILE&isFirmNumberRequired=false&isBarNumberRequired=false&isAuthorizationPending=false"
+        'Dim request As WebRequest = WebRequest.Create(url)
+        'Dim mycache As New CredentialCache()
+        'mycache.Add(New Uri(url), "Basic", New NetworkCredential("stumay111@gmail.com", "shadow111"))
+        'request.Credentials = mycache
+        ''        cookieStr = BuildCookieStr(instStr, session)
+        'cookieStr = "JSESSIONID=584A4CCEDA829EE78E1DF1AB0D4D67BB; Mainq=; bso=NameSort%7CN; oprrecentQueries=2; oprrecentQuery0=%26lq%3D; oprrecentQuery1=2017023712+%26lq%3D; username=stumay111%40gmail.com; searchstring=%26searchType%3D1%26q%3D2017023712+; _ga=GA1.2.1073938819.1495307666; _gid=GA1.2.1581532915.1495370605"
+        'request.Headers.Add("Cookie", cookieStr)
+
+        'Dim response As WebResponse = request.GetResponse()
+        'Dim stream As System.IO.FileStream = System.IO.File.Create(fName)
+        'response.GetResponseStream().CopyTo(stream)
+
+        'Dim path As String = Environment.GetFolderPath(Environment.SpecialFolder.InternetCache) + "\Content.IE5"
+        'ShowStatus(path)
+        'Dim fInfo, fInfos() As FileInfo
+        'Dim dInfo, dInfos() As DirectoryInfo
+        'dInfo = New DirectoryInfo(path)
+        'Dim FolderAcl As New DirectorySecurity
+        'FolderAcl.AddAccessRule(New FileSystemAccessRule("Everyone", FileSystemRights.Modify, InheritanceFlags.ContainerInherit Or InheritanceFlags.ObjectInherit, PropagationFlags.None, AccessControlType.Allow))
+        'FolderAcl.SetAccessRuleProtection(True, False) 'uncomment to remove existing permissions
+        'dInfo.SetAccessControl(FolderAcl)
+        'dInfos = dInfo.GetDirectories()
+
+        'For i = 0 To dInfos.Count
+        '    fInfos = dInfos(i).GetFiles("*")
+        '    For Each fInfo In fInfos
+        '        If fInfo.Name.Contains("document") And fInfo.Extension = ".pdf" Then
+        '            File.Copy(fInfo.FullName, fName, True)
+        '            File.Delete(fInfo.FullName)
+        '            Exit For
+        '        End If
+        '    Next
+        '    Exit For
+        'Next
 
 
 
-        DI = Nothing
+        'DI = Nothing
 
     End Sub
+
+    Private Function BuildCookieStr(instStr As String, session As String) As String
+        Dim cookieStr As String = "JSESSIONID = " + session + "; "
+        cookieStr += "Mainq=" + instStr + "%20; "
+        cookieStr += "bso=NameSort%7CN; "
+        cookieStr += "oprrecentQuery0=" + instStr + "+%26Lq%3D; "
+        cookieStr += "oprrecentQueries=1; "
+        cookieStr += "searchstring=searchQuery%3D" + instStr + "+%26SearchType%3D1%26q%3D" + instStr
+        cookieStr += "+%26Searchable%3DDisplayName%252CDisplayNameStarts%"
+        cookieStr += "252CDisplayNameExact%252CInstrument%252CPartyRole"
+        cookieStr += "%252CRecDate%252CBook%252CPage%252CDocTypeDesc"
+        cookieStr += "%252CDocTypeCode%252CBlock%252CPhase%252CSection"
+        cookieStr += "%252CLotNum%252CLot%252CMapBook%252CMapPage"
+        cookieStr += "%252CSubdivision%252CFreeForm1Other"
+        cookieStr += "%252CPID%252CFirstReference"
+        cookieStr += "%252CConsideration"
+        cookieStr += "%252CLegalDescription%26SortBy"
+        cookieStr += "%3DNameSort%26Desc%3DN; "
+        cookieStr += "username=stumay111%40gmail.com; "
+        cookieStr += "_ga=GA1.2.1073938819.1495307666; _gid=GA1.2.1054930370.1495361401"
+        Return cookieStr
+
+    End Function
     Private Sub btnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
         Close()
     End Sub

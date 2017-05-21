@@ -23,8 +23,8 @@ Partial Class fmWebViewer
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(fmWebViewer))
-        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser
-        Me.Panel1 = New System.Windows.Forms.Panel
+        Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
